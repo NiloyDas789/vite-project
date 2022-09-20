@@ -1,23 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import useFetch from '../hooks/useFetch'
 
 function Joke() {
-    const [joke, setJoke] = useState('')
-    const [isLoading, setIsLoading] = useState(true)
-    const [errorMessage, setErrorMessage] = useState(false)
-    useEffect(() => {
-        fetch('https://official-joke-api.appspot.com/jokes/randomu')
-        .then(response => response.json())
-        .then(results =>{ 
-          setJoke(results) 
-          console.log(joke);
-          setIsLoading(false)
-          console.log(results);
-        })
-        .catch(()=>{
-            setIsLoading(false)
-            setErrorMessage('There was an error!')
-        })
-    }, [])
+    const  {data: joke, isLoading, errorMessage}= useFetch('https://official-joke-api.appspot.com/jokes/random')
 
   return (
     <div>
